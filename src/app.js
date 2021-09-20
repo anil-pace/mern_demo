@@ -70,12 +70,25 @@ app.get("/students/:id", async (req, res) => {
 });
 
 
+// update a student by id
+app.patch("/students/:id", async (req, res) => {
+    try {
+        const updateStudent = await Student.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!req.params.id) {
+            return res.status(404).send();
+        }
+        res.send(updateStudent);
+    } catch (e) {
+        console.log("error ==> " + e);
+        res.status(500).send(e);
+    }
+});
+
 // delete a student by id
 app.delete("/students/:id", async (req, res) => {
     try {
-        const id = req.params.id;
-        const deleteStudent = await Student.findByIdAndDelete(id);
-        if (!id) {
+        const deleteStudent = await Student.findByIdAndDelete(req.params.id);
+        if (!req.params.id) {
             return res.status(404).send();
         }
         res.send(deleteStudent);
