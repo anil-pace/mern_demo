@@ -20,7 +20,6 @@ const studentSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
-        unique: true
     }
 });
 
