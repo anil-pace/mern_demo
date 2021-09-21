@@ -12,7 +12,7 @@ router.get("/sujata", (req, res) => {
 router.post("/students", async (req, res) => {
     try {
         console.log(req.body);
-        const user = new student(req.body);
+        const user = new Student(req.body);
         const createUser = await user.save();
         res.status(201).send(createUser);
     }
